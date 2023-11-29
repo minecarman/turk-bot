@@ -1,14 +1,18 @@
+import io
 import discord
 from discord.ext import commands
 import random
 import jokeapi
-
-
-
+# -*- coding: utf-8 -*-
 def random_kufur():
-    with open("kufur.txt", "r") as file:
+    with io.open("kufur.txt", "r", encoding="utf8") as file:
         kufurler = file.readlines()
         return(random.choice(kufurler))
+
+def kufurlist():
+    with io.open("kufur.txt", "r", encoding="utf8") as file:
+        kufurler = file.readlines()
+        return kufurler
 
 
 def read_token():
@@ -29,8 +33,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    with open("kufur.txt", "r") as file:
-        kufurler = file.readlines()
 
     if message.content.startswith('mal bot'): # Mal bot
         await message.channel.send("ananı sikerim "+ random_kufur())
@@ -56,7 +58,7 @@ async def on_message(message):
     if message.content.startswith('31'):
         await message.channel.send("çok komik mk malı "+ random_kufur())
 
-    elif "bot" in message.content:
+    if message.content.startswith('bot'):
         await message.channel.send("????????????")
 
     if message.content.startswith('zekeriya'):
@@ -154,13 +156,13 @@ async def hesapla(ctx, sayi1: float, islem: str, sayi2: float):
 
 @client.command() # Sends random turkish image.
 async def turk(ctx):
-    images = ["T1.png", "T2.png", "T3.png", "T4.png", "T5.png", "T6.png", "T7.png", "T8.png", "T9.png", "T10.jpg", "T11.jpg", "T12.jpg", "T13.jpg"]
+    images = ["resim\T1.png", "resim\T2.png", "resim\T3.png", "resim\T4.png", "resim\T5.png", "resim\T6.png", "resim\T7.png", "resim\T8.png", "resim\T9.png", "resim\T10.jpg", "resim\T11.jpg", "resim\T12.jpg", "resim\T13.jpg"]
     await ctx.send(file=discord.File(random.choice(images)))
 
 
 @client.command() # Sends random turkish image.
 async def kurt(ctx):
-    await ctx.send(file=discord.File('K1.jpeg'))
+    await ctx.send(file=discord.File('resim\K1.jpeg'))
 
 
 @client.command(pass_context = True)
